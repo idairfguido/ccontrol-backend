@@ -30,13 +30,27 @@ public class Collaborator {
     @ManyToOne
     @JoinColumn(name = "cc_address_id")
     private Address address;
-    private Timestamp hiringDate;
+    private LocalDateTime hiringDate;
     @Column(name = "created_at")
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
     @Column(name = "update_at")
-    private Timestamp updatedAt;
+    private LocalDateTime updatedAt;
 
     public Collaborator() {
+        this.id = 0L;
+        this.phoneNumber = "";
+        this.fullName = "";
+        this.rg = "";
+        this.cpf = "";
+        this.code = "";
+        this.status = 1;
+        this.company = null;
+        this.department = null;
+        this.function = null;
+        this.address = null;
+        this.hiringDate = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -127,27 +141,27 @@ public class Collaborator {
         this.address = address;
     }
 
-    public Timestamp getHiringDate() {
+    public LocalDateTime getHiringDate() {
         return hiringDate;
     }
 
-    public void setHiringDate(Timestamp hiringDate) {
+    public void setHiringDate(LocalDateTime hiringDate) {
         this.hiringDate = hiringDate;
     }
 
-    public Timestamp getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

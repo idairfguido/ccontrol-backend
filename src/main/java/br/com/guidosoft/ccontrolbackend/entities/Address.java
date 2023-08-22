@@ -21,11 +21,21 @@ public class Address {
     private String city;
     private String state;
     @Column(name = "created_at")
-    private Timestamp createdAt;
-    @Column(name = "update_at")
-    private Timestamp updatedAt;
+    private LocalDateTime createdAt;
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
     public Address() {
+        this.id = 0L;
+        this.number = 0;
+        this.status = 1;
+        this.cep = "";
+        this.street = "";
+        this.district = "";
+        this.city = "";
+        this.state = "";
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -92,19 +102,19 @@ public class Address {
         this.state = state;
     }
 
-    public Timestamp getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

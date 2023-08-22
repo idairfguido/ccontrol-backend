@@ -3,6 +3,7 @@ package br.com.guidosoft.ccontrolbackend.entities;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -21,13 +22,25 @@ public class Company {
     @ManyToOne
     @JoinColumn(name = "cc_address_id")
     private Address address;
-    private Timestamp foundationDate;
+    private LocalDateTime foundationDate;
     @Column(name = "created_at")
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
     @Column(name = "update_at")
-    private Timestamp updatedAt;
+    private LocalDateTime updatedAt;
 
     public Company() {
+        this.id = 0L;
+        this.fantasyName = "";
+        this.companyName = "";
+        this.cnpj = "";
+        this.stateRegistration = "";
+        this.siteUrl = "";
+        this.email = "";
+        this.phoneNumber = "";
+        this.address = null;
+        this.foundationDate = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -102,27 +115,27 @@ public class Company {
         this.address = address;
     }
 
-    public Timestamp getFoundationDate() {
+    public LocalDateTime getFoundationDate() {
         return foundationDate;
     }
 
-    public void setFoundationDate(Timestamp foundationDate) {
+    public void setFoundationDate(LocalDateTime foundationDate) {
         this.foundationDate = foundationDate;
     }
 
-    public Timestamp getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

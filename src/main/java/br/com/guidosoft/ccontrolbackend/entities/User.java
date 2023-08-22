@@ -1,8 +1,10 @@
 package br.com.guidosoft.ccontrolbackend.entities;
 
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -21,11 +23,21 @@ public class User {
     @JoinColumn(name = "cc_address_id")
     private Address address;
     @Column(name = "created_at")
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
     @Column(name = "update_at")
-    private Timestamp updatedAt;
+    private LocalDateTime updatedAt;
 
     public User() {
+        this.id = 0L;
+        this.fullName = "";
+        this.userName = "";
+        this.password = "";
+        this.phoneNumber = "";
+        this.accessLevel = 0;
+        this.status = 1;
+        this.address = null;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -92,19 +104,19 @@ public class User {
         this.address = address;
     }
 
-    public Timestamp getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

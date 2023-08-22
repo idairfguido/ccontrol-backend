@@ -3,6 +3,7 @@ package br.com.guidosoft.ccontrolbackend.entities;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -21,11 +22,19 @@ public class Note {
     @JoinColumn(name = "cc_collaborator_id")
     private Collaborator collaborator;
     @Column(name = "created_at")
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
     @Column(name = "update_at")
-    private Timestamp updatedAt;
+    private LocalDateTime updatedAt;
 
     public Note() {
+        this.id = 0L;
+        this.title = "";
+        this.description = "";
+        this.status = 1;
+        this.user = null;
+        this.collaborator = null;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -76,19 +85,19 @@ public class Note {
         this.collaborator = collaborator;
     }
 
-    public Timestamp getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 
