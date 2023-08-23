@@ -2,10 +2,13 @@ package br.com.guidosoft.ccontrolbackend.controllers;
 
 import br.com.guidosoft.ccontrolbackend.entities.Address;
 import br.com.guidosoft.ccontrolbackend.entities.User;
+import br.com.guidosoft.ccontrolbackend.records.UserRequestDTO;
+import br.com.guidosoft.ccontrolbackend.records.UserResponseDTO;
 import br.com.guidosoft.ccontrolbackend.repositories.AddressRepository;
 import br.com.guidosoft.ccontrolbackend.repositories.UserRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;

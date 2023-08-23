@@ -1,5 +1,6 @@
 package br.com.guidosoft.ccontrolbackend.entities;
 
+import br.com.guidosoft.ccontrolbackend.records.UserRequestDTO;
 import jakarta.persistence.*;
 import org.springframework.cglib.core.Local;
 
@@ -30,6 +31,31 @@ public class User {
     public User() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public User(Long id, String fullName, String userName, String password, String phoneNumber, int accessLevel, int status, Address address, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        this.fullName = fullName;
+        this.userName = userName;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.accessLevel = accessLevel;
+        this.status = status;
+        this.address = address;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public User(UserRequestDTO data){
+        this.fullName = data.fullName();
+        this.userName = data.userName();
+        this.password = data.password();
+        this.phoneNumber = data.phoneNumber();
+        this.accessLevel = data.accessLevel();
+        this.status = data.status();
+        this.address = data.address();
+        this.createdAt = data.createdAt();
+        this.updatedAt = data.updatedAt();
     }
 
     public Long getId() {
