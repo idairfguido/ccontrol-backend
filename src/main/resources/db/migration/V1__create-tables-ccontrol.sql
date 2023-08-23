@@ -2,7 +2,6 @@
 -- Please log an issue at https://redmine.postgresql.org/projects/pgadmin4/issues/new if you find any bugs, including reproduction steps.
 BEGIN;
 
-
 CREATE TABLE IF NOT EXISTS public.cc_user
 (
     id serial NOT NULL,
@@ -12,9 +11,9 @@ CREATE TABLE IF NOT EXISTS public.cc_user
     phone_number character varying(20),
     access_level integer NOT NULL,
     status integer NOT NULL,
-    cc_address_id integer,
-    created_at time without time zone NOT NULL DEFAULT now(),
-    updated_at time without time zone NOT NULL DEFAULT now(),
+    cc_address_id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT now(),
+    updated_at timestamp with time zone DEFAULT now(),
     PRIMARY KEY (id)
 );
 
@@ -26,8 +25,8 @@ CREATE TABLE IF NOT EXISTS public.cc_field
     application integer NOT NULL,
     status integer NOT NULL,
     type integer NOT NULL,
-    created_at time without time zone NOT NULL DEFAULT now(),
-    updated_at time without time zone NOT NULL DEFAULT now(),
+    created_at timestamp with time zone DEFAULT now(),
+    updated_at timestamp with time zone DEFAULT now(),
     PRIMARY KEY (id)
 );
 
@@ -37,8 +36,8 @@ CREATE TABLE IF NOT EXISTS public.cc_department
     name character varying(50) NOT NULL,
     code character varying(10),
     status integer NOT NULL,
-    created_at time without time zone NOT NULL DEFAULT now(),
-    updated_at time without time zone NOT NULL DEFAULT now(),
+    created_at timestamp with time zone DEFAULT now(),
+    updated_at timestamp with time zone DEFAULT now(),
     PRIMARY KEY (id)
 );
 
@@ -54,10 +53,10 @@ CREATE TABLE IF NOT EXISTS public.cc_collaborator
     cc_company_id integer NOT NULL,
     cc_sector_id integer NOT NULL,
     cc_function_id integer NOT NULL,
-    cc_address_id integer,
-    hiring_date time without time zone,
-    created_at time without time zone NOT NULL DEFAULT now(),
-    updated_at time without time zone NOT NULL DEFAULT now(),
+    cc_address_id integer NOT NULL,
+    hiring_date timestamp with time zone,
+    created_at timestamp with time zone DEFAULT now(),
+    updated_at timestamp with time zone DEFAULT now(),
     PRIMARY KEY (id)
 );
 
@@ -71,10 +70,10 @@ CREATE TABLE IF NOT EXISTS public.cc_company
     site_url character varying(50),
     email character varying(50),
     phone_number character varying,
-    cc_address_id integer,
-    foundation_date time without time zone,
-    created_at time without time zone NOT NULL DEFAULT now(),
-    updated_at time without time zone NOT NULL DEFAULT now(),
+    cc_address_id integer NOT NULL,
+    foundation_date timestamp with time zone,
+    created_at timestamp with time zone DEFAULT now(),
+    updated_at timestamp with time zone DEFAULT now(),
     PRIMARY KEY (id)
 );
 
@@ -87,8 +86,8 @@ CREATE TABLE IF NOT EXISTS public.cc_entry
     cc_collaborator_id integer NOT NULL,
     cc_field_id integer NOT NULL,
     cc_value_id integer NOT NULL,
-    created_at time without time zone NOT NULL DEFAULT now(),
-    updated_at time without time zone NOT NULL DEFAULT now(),
+    created_at timestamp with time zone DEFAULT now(),
+    updated_at timestamp with time zone DEFAULT now(),
     PRIMARY KEY (id)
 );
 
@@ -97,8 +96,8 @@ CREATE TABLE IF NOT EXISTS public.cc_value
     id serial NOT NULL,
     content character varying(20) NOT NULL,
     status integer NOT NULL,
-    created_at time without time zone NOT NULL DEFAULT now(),
-    updated_at time without time zone NOT NULL DEFAULT now(),
+    created_at timestamp with time zone DEFAULT now(),
+    updated_at timestamp with time zone DEFAULT now(),
     PRIMARY KEY (id)
 );
 
@@ -108,8 +107,8 @@ CREATE TABLE IF NOT EXISTS public.cc_function
     name character varying(50) NOT NULL,
     code character varying(10),
     status integer NOT NULL,
-    created_at time without time zone NOT NULL DEFAULT now(),
-    updated_at time without time zone NOT NULL DEFAULT now(),
+    created_at timestamp with time zone NOT NULL DEFAULT now(),
+    updated_at timestamp with time zone NOT NULL DEFAULT now(),
     PRIMARY KEY (id)
 );
 
@@ -121,8 +120,8 @@ CREATE TABLE IF NOT EXISTS public.cc_note
     status integer NOT NULL,
     cc_user_id integer NOT NULL,
     cc_collaborator_id integer NOT NULL,
-    created_at time without time zone NOT NULL DEFAULT now(),
-    updated_at time without time zone NOT NULL DEFAULT now(),
+    created_at timestamp with time zone DEFAULT now(),
+    updated_at timestamp with time zone DEFAULT now(),
     PRIMARY KEY (id)
 );
 
@@ -136,8 +135,8 @@ CREATE TABLE IF NOT EXISTS public.cc_address
     district character varying(50) NOT NULL,
     city character varying(20) NOT NULL,
     state character varying(20) NOT NULL,
-    created_at time without time zone NOT NULL DEFAULT now(),
-    updated_at time without time zone NOT NULL DEFAULT now(),
+    created_at timestamp with time zone DEFAULT now(),
+    updated_at timestamp with time zone DEFAULT now(),
     PRIMARY KEY (id)
 );
 
@@ -146,8 +145,8 @@ CREATE TABLE IF NOT EXISTS public.cc_company_department
     id serial NOT NULL,
     cc_company_id integer NOT NULL,
     cc_department_id integer NOT NULL,
-    created_at time without time zone NOT NULL DEFAULT now(),
-    update_at time without time zone NOT NULL DEFAULT now(),
+    created_at timestamp with time zone DEFAULT now(),
+    update_at timestamp with time zone DEFAULT now(),
     PRIMARY KEY (id)
 );
 
@@ -156,8 +155,16 @@ CREATE TABLE IF NOT EXISTS public.cc_department_function
     id serial NOT NULL,
     cc_department_id integer NOT NULL,
     cc_function_id integer NOT NULL,
-    created_at time without time zone NOT NULL DEFAULT now(),
-    update_at time without time zone NOT NULL DEFAULT now(),
+    created_at timestamp with time zone NOT NULL DEFAULT now(),
+    update_at timestamp with time zone NOT NULL DEFAULT now(),
     PRIMARY KEY (id)
 );
+
+ALTER TABLE IF EXISTS public.cc_user
+    ADD CONSTRAINT cc_address_id_fk FOREIGN KEY (cc_address_id)
+    REFERENCES public.cc_address (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
 END;

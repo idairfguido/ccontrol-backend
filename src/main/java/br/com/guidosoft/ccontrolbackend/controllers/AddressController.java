@@ -5,6 +5,7 @@ import br.com.guidosoft.ccontrolbackend.repositories.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -23,6 +24,7 @@ public class AddressController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping
     public void insert(@RequestBody Address data){
+        data.setCreatedAt(LocalDateTime.now());
         repository.save(data);
         return;
     }

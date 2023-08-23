@@ -123,7 +123,7 @@ public class Address {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
-        return Objects.equals(id, address.id);
+        return number == address.number && status == address.status && Objects.equals(cep, address.cep) && Objects.equals(street, address.street) && Objects.equals(district, address.district) && Objects.equals(city, address.city) && Objects.equals(state, address.state);
     }
 
     @Override

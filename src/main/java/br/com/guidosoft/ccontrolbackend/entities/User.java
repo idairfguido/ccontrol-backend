@@ -19,23 +19,15 @@ public class User {
     private String phoneNumber;
     private int accessLevel;
     private int status;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "cc_address_id")
     private Address address;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
-    @Column(name = "update_at")
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     public User() {
-        this.id = 0L;
-        this.fullName = "";
-        this.userName = "";
-        this.password = "";
-        this.phoneNumber = "";
-        this.accessLevel = 0;
-        this.status = 1;
-        this.address = null;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
