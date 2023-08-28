@@ -28,6 +28,9 @@ public class User {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    public static final int STATUS_DISABLED = 0;
+    public static final int STATUS_ENABLED = 1;
+
     public User() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();

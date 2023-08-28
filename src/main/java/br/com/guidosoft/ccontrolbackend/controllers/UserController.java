@@ -2,13 +2,12 @@ package br.com.guidosoft.ccontrolbackend.controllers;
 
 import br.com.guidosoft.ccontrolbackend.entities.Address;
 import br.com.guidosoft.ccontrolbackend.entities.User;
-import br.com.guidosoft.ccontrolbackend.records.UserRequestDTO;
-import br.com.guidosoft.ccontrolbackend.records.UserResponseDTO;
 import br.com.guidosoft.ccontrolbackend.repositories.AddressRepository;
 import br.com.guidosoft.ccontrolbackend.repositories.UserRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -47,5 +46,14 @@ public class UserController {
         addressRepository.save(data.getAddress());
         data.setCreatedAt(user.getCreatedAt());
         return userRepository.save(data);
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @DeleteMapping("/{id}")
+    public User delete(@PathVariable("id") Long id) throws ObjectNotFoundException {
+        Optional<User> optionalUser = userRepository.findById(id);
+        User user = optionalUser.orElseThrow(() -> new ObjectNotFoundException(id, "User not found"));
+        user.setStatus(User.STATUS_DISABLED);
+        return userRepository.save(user);
     }
 }
