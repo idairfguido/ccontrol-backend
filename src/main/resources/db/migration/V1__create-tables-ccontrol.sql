@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS public.cc_user
     user_name character varying(15) NOT NULL,
     password character varying(50) NOT NULL,
     phone_number character varying(20),
-    access_level integer NOT NULL,
+    access_level character varying(10) NOT NULL,
     status integer NOT NULL,
     cc_address_id integer NOT NULL,
     created_at timestamp with time zone DEFAULT now(),
