@@ -1,8 +1,7 @@
 package br.com.guidosoft.ccontrolbackend.entities;
 
+import br.com.guidosoft.ccontrolbackend.enuns.Status;
 import jakarta.persistence.*;
-
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -19,6 +18,7 @@ public class Company {
     private String siteUrl;
     private String email;
     private String phoneNumber;
+    private Status status;
     @ManyToOne
     @JoinColumn(name = "cc_address_id")
     private Address address;
@@ -29,15 +29,6 @@ public class Company {
     private LocalDateTime updatedAt;
 
     public Company() {
-        this.id = 0L;
-        this.fantasyName = "";
-        this.companyName = "";
-        this.cnpj = "";
-        this.stateRegistration = "";
-        this.siteUrl = "";
-        this.email = "";
-        this.phoneNumber = "";
-        this.address = null;
         this.foundationDate = LocalDateTime.now();
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
@@ -105,6 +96,14 @@ public class Company {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Address getAddress() {

@@ -1,8 +1,8 @@
 package br.com.guidosoft.ccontrolbackend.entities;
 
+import br.com.guidosoft.ccontrolbackend.enuns.FieldType;
+import br.com.guidosoft.ccontrolbackend.enuns.Status;
 import jakarta.persistence.*;
-
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -15,20 +15,14 @@ public class Field {
     private String name;
     private String code;
     private int application;
-    private int status;
-    private int type;
+    private Status status;
+    private FieldType type;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     @Column(name = "update_at")
     private LocalDateTime updatedAt;
 
     public Field() {
-        this.id = 0L;
-        this.name = "";
-        this.code = "";
-        this.application = 0;
-        this.status = 1;
-        this.type = 1;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
@@ -65,19 +59,19 @@ public class Field {
         this.application = application;
     }
 
-    public int getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public int getType() {
+    public FieldType getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(FieldType type) {
         this.type = type;
     }
 

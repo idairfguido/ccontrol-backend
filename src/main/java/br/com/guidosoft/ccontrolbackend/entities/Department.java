@@ -1,8 +1,7 @@
 package br.com.guidosoft.ccontrolbackend.entities;
 
+import br.com.guidosoft.ccontrolbackend.enuns.Status;
 import jakarta.persistence.*;
-
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -14,17 +13,13 @@ public class Department {
     private Long id;
     private String name;
     private String code;
-    private int status;
+    private Status status;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     @Column(name = "update_at")
     private LocalDateTime updatedAt;
 
     public Department() {
-        this.id = 0L;
-        this.name = "";
-        this.code = "";
-        this.status = 1;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
@@ -53,11 +48,11 @@ public class Department {
         this.code = code;
     }
 
-    public int getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

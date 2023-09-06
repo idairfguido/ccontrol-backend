@@ -1,8 +1,7 @@
 package br.com.guidosoft.ccontrolbackend.entities;
 
+import br.com.guidosoft.ccontrolbackend.enuns.Status;
 import jakarta.persistence.*;
-
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -13,7 +12,7 @@ public class Entry {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int fixedEntry;
-    private int status;
+    private Status status;
     @ManyToOne
     @JoinColumn(name = "cc_user_id")
     private User user;
@@ -32,13 +31,6 @@ public class Entry {
     private LocalDateTime updatedAt;
 
     public Entry() {
-        this.id = 0L;
-        this.fixedEntry = 0;
-        this.status = 1;
-        this.user = null;
-        this.collaborator = null;
-        this.field = null;
-        this.value = null;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
@@ -59,11 +51,11 @@ public class Entry {
         this.fixedEntry = fixedEntry;
     }
 
-    public int getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

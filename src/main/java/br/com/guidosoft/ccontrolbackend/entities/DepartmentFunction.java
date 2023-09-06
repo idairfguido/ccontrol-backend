@@ -1,8 +1,6 @@
 package br.com.guidosoft.ccontrolbackend.entities;
 
 import jakarta.persistence.*;
-
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Objects;
 

@@ -1,15 +1,15 @@
 package br.com.guidosoft.ccontrolbackend.entities;
 
+import br.com.guidosoft.ccontrolbackend.enuns.Status;
 import br.com.guidosoft.ccontrolbackend.enuns.UserRule;
 import br.com.guidosoft.ccontrolbackend.records.UserRequestDTO;
 import jakarta.persistence.*;
-import org.springframework.cglib.core.Local;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -23,7 +23,7 @@ public class User implements UserDetails {
     private String password;
     private String phoneNumber;
     private UserRule accessLevel;
-    private int status;
+    private Status status;
     @OneToOne
     @JoinColumn(name = "cc_address_id")
     private Address address;
@@ -32,15 +32,12 @@ public class User implements UserDetails {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public static final int STATUS_DISABLED = 0;
-    public static final int STATUS_ENABLED = 1;
-
     public User() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
 
-    public User(Long id, String fullName, String userName, String password, String phoneNumber, UserRule accessLevel, int status, Address address, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public User(Long id, String fullName, String userName, String password, String phoneNumber, UserRule accessLevel, Status status, Address address, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.fullName = fullName;
         this.userName = userName;
@@ -91,7 +88,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.accessLevel == UserRole.ADMIN) {
+        if(this.accessLevel == UserRule.ADMIN) {
             return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
         }else {
             return List.of(new SimpleGrantedAuthority("ROLE_USER"));
@@ -147,11 +144,11 @@ public class User implements UserDetails {
         this.accessLevel = accessLevel;
     }
 
-    public int getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

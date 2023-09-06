@@ -2,6 +2,7 @@ package br.com.guidosoft.ccontrolbackend.controllers;
 
 import br.com.guidosoft.ccontrolbackend.entities.Address;
 import br.com.guidosoft.ccontrolbackend.entities.User;
+import br.com.guidosoft.ccontrolbackend.enuns.Status;
 import br.com.guidosoft.ccontrolbackend.repositories.AddressRepository;
 import br.com.guidosoft.ccontrolbackend.repositories.UserRepository;
 import org.hibernate.ObjectNotFoundException;
@@ -53,7 +54,7 @@ public class UserController {
     public User delete(@PathVariable("id") Long id) throws ObjectNotFoundException {
         Optional<User> optionalUser = userRepository.findById(id);
         User user = optionalUser.orElseThrow(() -> new ObjectNotFoundException(id, "User not found"));
-        user.setStatus(User.STATUS_DISABLED);
+        user.setStatus(Status.INACTIVE);
         return userRepository.save(user);
     }
 }

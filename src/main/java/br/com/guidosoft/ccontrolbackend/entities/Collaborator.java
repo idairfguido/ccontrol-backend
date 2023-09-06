@@ -1,8 +1,7 @@
 package br.com.guidosoft.ccontrolbackend.entities;
 
+import br.com.guidosoft.ccontrolbackend.enuns.Status;
 import jakarta.persistence.*;
-
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -17,7 +16,7 @@ public class Collaborator {
     private String rg;
     private String cpf;
     private String code;
-    private int status;
+    private Status status;
     @ManyToOne
     @JoinColumn(name = "cc_company_id")
     private Company company;
@@ -37,17 +36,6 @@ public class Collaborator {
     private LocalDateTime updatedAt;
 
     public Collaborator() {
-        this.id = 0L;
-        this.phoneNumber = "";
-        this.fullName = "";
-        this.rg = "";
-        this.cpf = "";
-        this.code = "";
-        this.status = 1;
-        this.company = null;
-        this.department = null;
-        this.function = null;
-        this.address = null;
         this.hiringDate = LocalDateTime.now();
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
@@ -101,11 +89,11 @@ public class Collaborator {
         this.code = code;
     }
 
-    public int getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

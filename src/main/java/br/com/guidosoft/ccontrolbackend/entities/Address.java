@@ -1,9 +1,7 @@
 package br.com.guidosoft.ccontrolbackend.entities;
 
+import br.com.guidosoft.ccontrolbackend.enuns.Status;
 import jakarta.persistence.*;
-import org.springframework.data.annotation.CreatedDate;
-
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -13,8 +11,8 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int number;
-    private int status;
+    private int addressNumber;
+    private Status status;
     private String cep;
     private String street;
     private String district;
@@ -26,14 +24,6 @@ public class Address {
     private LocalDateTime updatedAt;
 
     public Address() {
-        this.id = 0L;
-        this.number = 0;
-        this.status = 1;
-        this.cep = "";
-        this.street = "";
-        this.district = "";
-        this.city = "";
-        this.state = "";
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
@@ -46,19 +36,19 @@ public class Address {
         this.id = id;
     }
 
-    public int getNumber() {
-        return number;
+    public int getAddressNumber() {
+        return addressNumber;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setAddressNumber(int addressNumber) {
+        this.addressNumber = addressNumber;
     }
 
-    public int getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -123,7 +113,7 @@ public class Address {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
-        return number == address.number && status == address.status && Objects.equals(cep, address.cep) && Objects.equals(street, address.street) && Objects.equals(district, address.district) && Objects.equals(city, address.city) && Objects.equals(state, address.state);
+        return Objects.equals(id, address.id);
     }
 
     @Override

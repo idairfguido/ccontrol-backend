@@ -1,5 +1,6 @@
 package br.com.guidosoft.ccontrolbackend.entities;
 
+import br.com.guidosoft.ccontrolbackend.enuns.Status;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
@@ -13,16 +14,13 @@ public class Value {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
-    private int status;
+    private Status status;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     @Column(name = "update_at")
     private LocalDateTime updatedAt;
 
     public Value() {
-        this.id = 0L;
-        this.content = "";
-        this.status = 1;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
@@ -43,11 +41,11 @@ public class Value {
         this.content = content;
     }
 
-    public int getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
