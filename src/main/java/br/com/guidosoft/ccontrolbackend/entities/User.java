@@ -1,16 +1,20 @@
 package br.com.guidosoft.ccontrolbackend.entities;
 
+import br.com.guidosoft.ccontrolbackend.enuns.UserRule;
 import br.com.guidosoft.ccontrolbackend.records.UserRequestDTO;
 import jakarta.persistence.*;
 import org.springframework.cglib.core.Local;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "cc_user")
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,7 +22,7 @@ public class User {
     private String userName;
     private String password;
     private String phoneNumber;
-    private int accessLevel;
+    private UserRule accessLevel;
     private int status;
     @OneToOne
     @JoinColumn(name = "cc_address_id")
@@ -36,7 +40,7 @@ public class User {
         this.updatedAt = LocalDateTime.now();
     }
 
-    public User(Long id, String fullName, String userName, String password, String phoneNumber, int accessLevel, int status, Address address, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public User(Long id, String fullName, String userName, String password, String phoneNumber, UserRule accessLevel, int status, Address address, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.fullName = fullName;
         this.userName = userName;
@@ -85,8 +89,38 @@ public class User {
         this.userName = userName;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return userName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setPassword(String password) {
@@ -101,11 +135,11 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getAccessLevel() {
+    public UserRule getAccessLevel() {
         return accessLevel;
     }
 
-    public void setAccessLevel(int accessLevel) {
+    public void setAccessLevel(UserRule accessLevel) {
         this.accessLevel = accessLevel;
     }
 
