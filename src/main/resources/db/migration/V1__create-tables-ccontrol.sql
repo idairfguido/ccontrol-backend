@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS public.cc_user
     id serial NOT NULL,
     full_name character varying(50) NOT NULL,
     user_name character varying(15) NOT NULL,
-    password character varying(50) NOT NULL,
+    password TEXT NOT NULL,
     phone_number character varying(20),
     access_level character varying(10) NOT NULL,
     status character varying(10) NOT NULL,
